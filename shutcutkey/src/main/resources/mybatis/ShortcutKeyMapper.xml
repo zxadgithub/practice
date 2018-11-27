@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxa.shortcut.dao.ShortcutKeyMapper" >
+  <resultMap id="BaseResultMap" type="com.zxa.shortcut.bean.ShortcutKey" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="second_category" property="secondCategory" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="first_category" property="firstCategory" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shortcut_key.name, shortcut_key.key, description, second_category, create_time, update_time, first_category,
+    shortcut_key.status
+  </sql>
+
+  <sql id="Base_Table">
+    from shortcut_key as sk
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+
+    <include refid="Base_Column_List" />
+    from shortcut_key
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="getShortcutKeyByName" resultType="com.zxa.shortcut.bean.ShortcutKey">
+
+    select sk.id,sk.name,sk.key,sk.description,sk.first_category,sk.second_category
+    <include refid="Base_Table" />
+    where sk.name like CONCAT('%',#{name},'%')
+
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shortcut_key
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zxa.shortcut.bean.ShortcutKey" >
+    insert into shortcut_key as sk (sk.name, sk.key,
+      description, second_category, create_time, 
+      update_time, first_category
+      )
+    values  #{name,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{secondCategory,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{firstCategory,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.zxa.shortcut.bean.ShortcutKey" >
+    insert into shortcut_key
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        shortcut_key.id,
+      </if>
+      <if test="name != null" >
+        shortcut_key.name,
+      </if>
+      <if test="key != null" >
+        shortcut_key.key,
+      </if>
+      <if test="description != null" >
+        shortcut_key.description,
+      </if>
+      <if test="secondCategory != null" >
+        shortcut_key.second_category,
+      </if>
+      <if test="createTime != null" >
+        shortcut_key.create_time,
+      </if>
+      <if test="updateTime != null" >
+        shortcut_key.update_time,
+      </if>
+      <if test="firstCategory != null" >
+        shortcut_key.first_category,
+      </if>
+      <if test="status != null" >
+        shortcut_key.status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="secondCategory != null" >
+        #{secondCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstCategory != null" >
+        #{firstCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxa.shortcut.bean.ShortcutKey" >
+    update shortcut_key
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="secondCategory != null" >
+        second_category = #{secondCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstCategory != null" >
+        first_category = #{firstCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxa.shortcut.bean.ShortcutKey" >
+    update shortcut_key
+    set name = #{name,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      second_category = #{secondCategory,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      first_category = #{firstCategory,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
