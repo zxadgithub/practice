@@ -1,6 +1,8 @@
 package com.zxa.shortcut.service;
 
-import com.zxa.shortcut.bean.ShortcutKey;
+		import com.zxa.shortcut.bean.Page;
+		import com.zxa.shortcut.bean.PageModel;
+		import com.zxa.shortcut.bean.ShortcutKey;
 
 /**
  * @ClassName: ShortcutKeyService
@@ -15,4 +17,8 @@ public interface ShortcutKeyService {
 	ShortcutKey getShortcutKeyByName(String name);
 
 	ShortcutKey createShortcutKey(ShortcutKey shortcutKey);
+
+	PageModel<ShortcutKey> getShortcutKeys(Page page);
+
+	ShortcutKey updateShortcutKey(ShortcutKey shortcutKey);
 }

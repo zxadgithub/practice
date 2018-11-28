@@ -1,6 +1,9 @@
 package com.zxa.shortcut.dao;
 
+import com.zxa.shortcut.bean.Page;
 import com.zxa.shortcut.bean.ShortcutKey;
+
+import java.util.List;
 
 public interface ShortcutKeyMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,8 @@ public interface ShortcutKeyMapper {
     int updateByPrimaryKey(ShortcutKey record);
 
     ShortcutKey getShortcutKeyByName(String name);
+
+    List<ShortcutKey> getAllShorcutKeys(Page page);
+
+    long getCount();
 }

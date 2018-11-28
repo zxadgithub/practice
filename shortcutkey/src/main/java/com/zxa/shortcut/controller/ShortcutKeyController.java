@@ -1,5 +1,7 @@
 package com.zxa.shortcut.controller;
 
+import com.zxa.shortcut.bean.Page;
+import com.zxa.shortcut.bean.PageModel;
 import com.zxa.shortcut.bean.ResponseResult;
 import com.zxa.shortcut.bean.ShortcutKey;
 import com.zxa.shortcut.service.ShortcutKeyService;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
  * @CreateDate: 2018/11/27 11:07
  */
 @RestController
-@RequestMapping("/sk")
 public class ShortcutKeyController {
 
 	Logger logger = LogManager.getLogger(this.getClass());
@@ -24,16 +25,26 @@ public class ShortcutKeyController {
 	@Autowired
 	ShortcutKeyService shortcutKeyService;
 
-	@GetMapping("/{name}")
+	@GetMapping("/skByName/{name}")
 	public ResponseResult getShortcutKeyByName(@PathVariable String name){
+		logger.info("enter getShortcutKeyByName params[]" + name);
 
 		ShortcutKey shortcutKey = shortcutKeyService.getShortcutKeyByName(name);
 		ResponseResult responseResult = ResultUtil.createSuccess(shortcutKey);
 
 		return responseResult;
 	}
+	@GetMapping("/skById/{id}")
+	public ResponseResult getShortcutKeyById(@PathVariable Integer id){
+		logger.info("enter getShortcutKeyByName params[]" + id);
 
-	@PutMapping
+		ShortcutKey shortcutKey = shortcutKeyService.getShortcutKeyById(id);
+		ResponseResult responseResult = ResultUtil.createSuccess(shortcutKey);
+
+		return responseResult;
+	}
+
+	@PutMapping("/sk")
 	public ResponseResult createShortcutKey(@RequestBody ShortcutKey shortcutKey){
 
 		logger.info("Enter createShortcutKey params[]" + shortcutKey);
@@ -41,6 +52,35 @@ public class ShortcutKeyController {
 		ShortcutKey shortcutKey1 = shortcutKeyService.createShortcutKey(shortcutKey);
 		ResponseResult responseResult = ResultUtil.createSuccess(shortcutKey);
 		return responseResult;
+	}
+
+	@PostMapping("/sk")
+	public ResponseResult updateShortcutKey(@RequestBody ShortcutKey shortcutKey){
+
+		logger.info("Enter updateShortcutKey params[]" + shortcutKey);
+
+		ShortcutKey shortcutKey1 = shortcutKeyService.updateShortcutKey(shortcutKey);
+		ResponseResult responseResult = ResultUtil.createSuccess(shortcutKey);
+		return responseResult;
+	}
+
+
+
+	@RequestMapping(value = "/sk",method = RequestMethod.GET)
+	public ResponseResult getAllShortcutKeys(Page page){
+		logger.info("Enter getAllShortcutKey()  params" + page);
+
+		if(page == null){
+			page = new Page();
+		}
+
+		PageModel<ShortcutKey> pageModel =  shortcutKeyService.getShortcutKeys(page);
+
+		ResponseResult responseResult = ResultUtil.createSuccess(pageModel);
+
+		return responseResult;
+
+
 	}
 
 

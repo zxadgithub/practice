@@ -1,12 +1,17 @@
 package com.zxa.shortcut.service.impl;
 
+import com.zxa.shortcut.bean.Page;
+import com.zxa.shortcut.bean.PageModel;
 import com.zxa.shortcut.bean.ShortcutKey;
 import com.zxa.shortcut.dao.ShortcutKeyMapper;
 import com.zxa.shortcut.service.ShortcutKeyService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName: ShortcutKeyServiceImpl
@@ -16,6 +21,8 @@ import java.util.Date;
  */
 @Service
 public class ShortcutKeyServiceImpl implements ShortcutKeyService {
+
+	Logger logger = LogManager.getLogger(this.getClass());
 
 	@Autowired
 	ShortcutKeyMapper shortcutKeyMapper;
@@ -38,5 +45,37 @@ public class ShortcutKeyServiceImpl implements ShortcutKeyService {
 		ShortcutKey shortcutKey1 = shortcutKeyMapper.selectByPrimaryKey(shortcutKey.getId());
 
 		return shortcutKey;
+	}
+
+
+	@Override
+	public ShortcutKey updateShortcutKey(ShortcutKey shortcutKey) {
+		shortcutKey.setUpdateTime(new Date());
+		shortcutKeyMapper.updateByPrimaryKeySelective(shortcutKey);
+		ShortcutKey shortcutKey1 = shortcutKeyMapper.selectByPrimaryKey(shortcutKey.getId());
+
+		return shortcutKey;
+	}
+
+	/**
+	 * @description //查询所有
+	 * @method  getShortcutKeys
+	 * @params  [page]
+	 * @return java.util.List<com.zxa.shortcut.bean.PageModel>
+	 * @date: 2018/11/27 14:34
+	 * @author:zhangxin_an
+	 */
+	@Override
+	public PageModel<ShortcutKey> getShortcutKeys(Page page) {
+
+		int count = (int)shortcutKeyMapper.getCount();
+
+		page.setTotal(count);
+		List<ShortcutKey> shortcutKeyList = shortcutKeyMapper.getAllShorcutKeys(page);
+		PageModel<ShortcutKey> pageModel = new PageModel(shortcutKeyList);
+		pageModel.setTotal(page.getTotal());
+		pageModel.setTotalPage(page.getTotalPage());
+
+		return pageModel;
 	}
 }
