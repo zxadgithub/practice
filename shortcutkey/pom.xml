@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>shortcutkey</artifactId>
-
+    <packaging>jar</packaging>
     <dependencies>
 
         <dependency>
@@ -31,17 +31,21 @@
                 <verbose>true</verbose>
             </configuration>
         </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
-            <configuration>
-                <verbose>true</verbose>
-                <fork>true</fork>
-                <executable>C:/Program Files/Java/jdk1.8.0_112/bin/javac</executable>
-            </configuration>
-        </plugin>
 
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
 </build>
 
