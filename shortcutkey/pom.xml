@@ -31,6 +31,17 @@
                 <verbose>true</verbose>
             </configuration>
         </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <configuration>
+                <verbose>true</verbose>
+                <fork>true</fork>
+                <executable>C:/Program Files/Java/jdk1.8.0_112/bin/javac</executable>
+            </configuration>
+        </plugin>
+
     </plugins>
 </build>
 
