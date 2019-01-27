@@ -21,6 +21,11 @@
         <relativePath></relativePath>
     </parent>
 
+    <properties>
+        <poi.version>3.15</poi.version>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -18,7 +18,7 @@ public class TestController {
 	@Autowired
 	ShortcutKeyService shortcutKeyService;
 
-	@GetMapping("/test")
+	@GetMapping("/api/test")
 	public ShortcutKey test(){
 		return shortcutKeyService.getShortcutKeyById(1);
 	}
