@@ -1,6 +1,8 @@
 package com.zxa.shortcut.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 public class MyHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+
+		if(request.getMethod().equals(RequestMethod.OPTIONS.name())) {
+			response.setStatus(HttpStatus.OK.value());
+			return false;
+		}
+
 		//处理跨域问题
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST,PUT,GET");
