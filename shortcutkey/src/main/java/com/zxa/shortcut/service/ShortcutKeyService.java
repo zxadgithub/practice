@@ -3,6 +3,7 @@ package com.zxa.shortcut.service;
 		import com.zxa.shortcut.bean.Page;
 		import com.zxa.shortcut.bean.PageModel;
 		import com.zxa.shortcut.bean.ShortcutKey;
+		import com.zxa.shortcut.bean.condition.ShortcutKeyCondition;
 
 /**
  * @ClassName: ShortcutKeyService
@@ -21,4 +22,6 @@ public interface ShortcutKeyService {
 	PageModel<ShortcutKey> getShortcutKeys(Page page);
 
 	ShortcutKey updateShortcutKey(ShortcutKey shortcutKey);
+
+	PageModel<ShortcutKey> getListByCondition(ShortcutKeyCondition condition);
 }

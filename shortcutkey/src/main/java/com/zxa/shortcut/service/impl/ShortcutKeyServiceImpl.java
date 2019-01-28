@@ -3,6 +3,7 @@ package com.zxa.shortcut.service.impl;
 import com.zxa.shortcut.bean.Page;
 import com.zxa.shortcut.bean.PageModel;
 import com.zxa.shortcut.bean.ShortcutKey;
+import com.zxa.shortcut.bean.condition.ShortcutKeyCondition;
 import com.zxa.shortcut.dao.ShortcutKeyMapper;
 import com.zxa.shortcut.service.ShortcutKeyService;
 import org.apache.logging.log4j.LogManager;
@@ -67,14 +68,29 @@ public class ShortcutKeyServiceImpl implements ShortcutKeyService {
 	 */
 	@Override
 	public PageModel<ShortcutKey> getShortcutKeys(Page page) {
-
-		int count = (int)shortcutKeyMapper.getCount();
+		ShortcutKeyCondition condition = new ShortcutKeyCondition();
+		condition.setStatus('1');
+		int count = (int)shortcutKeyMapper.getCount(condition);
 
 		page.setTotal(count);
 		List<ShortcutKey> shortcutKeyList = shortcutKeyMapper.getAllShorcutKeys(page);
 		PageModel<ShortcutKey> pageModel = new PageModel(shortcutKeyList);
 		pageModel.setTotal(page.getTotal());
 		pageModel.setTotalPage(page.getTotalPage());
+
+		return pageModel;
+	}
+
+
+	@Override
+	public PageModel<ShortcutKey> getListByCondition(ShortcutKeyCondition condition) {
+		int count = (int)shortcutKeyMapper.getCount(condition);
+
+		condition.setTotal(count);
+		List<ShortcutKey> shortcutKeyList = shortcutKeyMapper.getByCondition(condition);
+		PageModel<ShortcutKey> pageModel = new PageModel(shortcutKeyList);
+		pageModel.setTotal(condition.getTotal());
+		pageModel.setTotalPage(condition.getTotalPage());
 
 		return pageModel;
 	}

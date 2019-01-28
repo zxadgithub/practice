@@ -4,6 +4,7 @@ import com.zxa.shortcut.bean.Page;
 import com.zxa.shortcut.bean.PageModel;
 import com.zxa.shortcut.bean.ResponseResult;
 import com.zxa.shortcut.bean.ShortcutKey;
+import com.zxa.shortcut.bean.condition.ShortcutKeyCondition;
 import com.zxa.shortcut.service.ShortcutKeyService;
 import com.zxa.shortcut.utils.ResultUtil;
 import org.apache.logging.log4j.LogManager;
@@ -80,6 +81,25 @@ public class ShortcutKeyController {
 
 		return responseResult;
 
+
+	}
+
+	@RequestMapping(value = "/sk/byCondition",method = RequestMethod.GET)
+	public ResponseResult getListByCondition(ShortcutKeyCondition condition){
+		logger.info("Enter getListByCondition()  params" + condition);
+
+
+		PageModel<ShortcutKey> pageModel =  shortcutKeyService.getListByCondition(condition);
+
+		ResponseResult responseResult = ResultUtil.createSuccess(pageModel);
+
+		return responseResult;
+
+
+	}
+
+	@RequestMapping(name = "/*", method = RequestMethod.OPTIONS)
+	public void option(){
 
 	}
 
