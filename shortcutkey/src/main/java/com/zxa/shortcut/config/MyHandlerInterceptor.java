@@ -18,17 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 public class MyHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
+		//处理跨域问题
+		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+		response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Headers",
+				request.getHeader("Access-Control-Request-Headers"));
 		if(request.getMethod().equals(RequestMethod.OPTIONS.name())) {
 			response.setStatus(HttpStatus.OK.value());
 			return false;
 		}
-		//处理跨域问题
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Allow-Methods", "POST,PUT,GET");
-		response.setHeader("Access-Control-Max-Age", "3600");
-		response.setHeader("Access-Control-Allow-Headers",
-				"Origin, X-Requested-With, Content-Type, Accept");
 		return true;
 	}
 }
