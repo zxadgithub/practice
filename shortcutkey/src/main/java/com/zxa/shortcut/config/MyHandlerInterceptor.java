@@ -23,7 +23,6 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
 			response.setStatus(HttpStatus.OK.value());
 			return false;
 		}
-
 		//处理跨域问题
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST,PUT,GET");
