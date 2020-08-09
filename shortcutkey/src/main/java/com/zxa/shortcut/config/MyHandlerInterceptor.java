@@ -28,6 +28,7 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
 		response.setHeader("Access-Control-Allow-Headers",
 				request.getHeader("Access-Control-Request-Headers"));
 		logger.info("跨域请求" + request.getContextPath() + "返回值" + response.getHeader("Access-Control-Allow-Origin"));
+
 		if(request.getMethod().equals(RequestMethod.OPTIONS.name())) {
 			response.setStatus(HttpStatus.OK.value());
 			return true;

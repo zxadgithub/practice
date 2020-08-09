@@ -5,6 +5,7 @@ import com.zxa.shortcut.utils.ExportExcelUtils;
 import com.zxa.shortcut.utils.ExportExcelUtils1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ import java.util.List;
  * @CreateDate: 2018/12/9 17:21
  */
 @RestController
+@Component
 public class DownLoadController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
