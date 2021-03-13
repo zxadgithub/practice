@@ -1,4 +1,4 @@
-package com.zxa.practice.leetcode;
+package com.zxa.practice.leetcode.tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
