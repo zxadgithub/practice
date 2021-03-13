@@ -1,10 +1,7 @@
 package com.zxa.ioc.utils;
 
-import com.sun.tools.javac.util.StringUtils;
 import com.zxa.ioc.annotation.Autowired;
 import com.zxa.ioc.annotation.Component;
-import com.zxa.ioc.bean.BeanDefinition;
-import jdk.nashorn.internal.parser.JSONParser;
 import sun.reflect.Reflection;
 
 import java.io.File;
@@ -19,6 +16,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -120,6 +118,10 @@ public class DefaultApplicationContext implements ApplicationContext {
 
 	public static void main(String[] args) {
 		List<Class> classes = getClasses(SCAN_PACKAGE);
+		AtomicReference<Integer> i = new AtomicReference<>(0);
+		classes.forEach(c -> {
+			i.getAndSet(i.get() + 1);
+		});
 		System.out.println(classes);
 	}
 
