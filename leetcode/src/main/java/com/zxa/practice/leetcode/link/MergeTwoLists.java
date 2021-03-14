@@ -3,6 +3,7 @@ package com.zxa.practice.leetcode.link;
 /**
  * @author zhangxinan
  * @Classname MergeTwoLists
+ * 合并两个有序链表
  * @Date 2021/3/13 8:13 下午
  */
 public class MergeTwoLists {

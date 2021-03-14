@@ -8,7 +8,7 @@ package com.zxa.practice.leetcode.sort;
 public class QuickSort {
 
     public static void main(String[] args) {
-        Integer[] integers = {2, 13, 454, 6, 67, 32, 1};
+        Integer[] integers = {2};
         quickSort(integers, 0, integers.length - 1);
         System.out.println(integers);
     }
@@ -27,31 +27,30 @@ public class QuickSort {
 
     public static int partition(Integer[] array, int l, int r) {
         int p = array[l];
-        int i = l, j = r+1;
+        int i = l, j =  r + 1;
         while (true) {
-            while (array[++i] < p) {
+
+            while (array[++i] <= p) {
                 if (i == r){
                     break;
                 }
             }
-            while (array[--j] > p) {
+            while (array[--j] >= p) {
                 if (j == l){
                     break;
                 }
             }
             if ((i >= j)) {
-                 break;
+                break;
             }
-            compareAndSwap(array, i, j);
+
+            swap(array, i, j);
         }
-        compareAndSwap(array, l, j);
+        swap(array, l, j);
         return j;
     }
 
-    private static void compareAndSwap(Integer[] array, int l, int r) {
-        if (array[l] <= array[r]){
-            return;
-        }
+    private static void swap(Integer[] array, int l, int r) {
         int temp = array[l];
         array[l] = array[r];
         array[r] = temp;
