@@ -7,7 +7,7 @@ package com.zxa.practice.leetcode.link;
  */
 public class ReverseLinkList {
 
-    public ListNode reverseList(ListNode head) {
+    public static ListNode reverseList(ListNode head) {
         if (head == null) {
             return null;
         }
