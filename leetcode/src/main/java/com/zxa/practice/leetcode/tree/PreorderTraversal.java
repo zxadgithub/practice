@@ -2,6 +2,7 @@ package com.zxa.practice.leetcode.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author zhangxinan
@@ -29,5 +30,30 @@ public class PreorderTraversal {
         preorderTraversal(result, root.left);
         preorderTraversal(result, root.right);
 
+    }
+
+    /**
+     * 递归
+     * @param result
+     * @param root
+     */
+    private void preorderTraversal0(final List<Integer> result, TreeNode root) {
+        if (root == null){
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            result.add(pop.val);
+            if (pop.right != null) {
+                stack.push(pop.right);
+            }
+            if (pop.left != null) {
+                stack.push(pop.left);
+            }
+
+        }
     }
 }
