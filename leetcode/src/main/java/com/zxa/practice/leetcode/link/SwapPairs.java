@@ -9,6 +9,23 @@ package com.zxa.practice.leetcode.link;
  * 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
  */
 public class SwapPairs {
+
+
+    /**
+     * 递归解法
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs1(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode next = head.next;
+        head.next = swapPairs1(next.next);
+        next.next = head;
+        return next;
+    }
+
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null){
             return head;
@@ -51,4 +68,6 @@ public class SwapPairs {
         return dummyHead.next;
 
     }
+
+
 }
