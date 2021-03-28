@@ -25,6 +25,11 @@ import java.util.Set;
  */
 public class DetectCycle {
 
+    /**
+     * hash表完成
+     * @param head
+     * @return
+     */
     public ListNode detectCycle(ListNode head) {
         if (head == null){
             return head;
@@ -40,6 +45,42 @@ public class DetectCycle {
         }
         return null;
 
+    }
+
+    /**
+     * 快慢指针
+     * 当快慢指针相遇时候
+     * 假设head到环口为a, 相遇点 - 环口 距离为b，相遇点还需要c才再能到环口,,
+     * 如下图，相遇点在7，则a = 1,b = 4 ,c = 2
+     * 1，2，4，6，7,8
+     *    ↑
+     * 则此时s(fast)  = a + b + n(b + c) = a + (n+1)b + nc,  s(slow) = a + b, s(fast) = 2s(slow)
+     * 既a+(n+1)b+nc=2(a+b)⟹a=c+(n−1)(b+c)
+     * 既我们会发现：从相遇点到入环点的距离加上 n−1 圈的环长，恰好等于从链表头部到入环点的距离 若n = 1,则a = c。
+     * 既相遇时，另一指针restart 走到环口的距离  = slow走到环口的距离
+     * @param head
+     * @return
+     */
+    public ListNode detectCycle1(ListNode head) {
+        if (head == null || head.next == null){
+            return null;
+        }
+
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast){
+                ListNode restart = head;
+                while (restart != slow){
+                    slow = slow.next;
+                    restart = restart.next;
+                }
+                return restart;
+            }
+
+        }
+        return null;
     }
 
 }
