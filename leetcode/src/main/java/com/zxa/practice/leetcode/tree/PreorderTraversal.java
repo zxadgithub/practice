@@ -33,7 +33,7 @@ public class PreorderTraversal {
     }
 
     /**
-     * 递归
+     * 非递归
      * @param result
      * @param root
      */
