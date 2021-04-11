@@ -24,4 +24,23 @@ public class StockMaxProfit {
 
     }
 
+    /**
+     * 动态记录最低价格，每天和最低价格比较
+     * @param prices
+     * @return
+     */
+    public int maxProfit1(int[] prices) {
+        int max = 0;
+        int minPrice = prices[0];
+        for(int i = 0; i < prices.length; i++){
+            int tempMin = prices[i] - minPrice;
+            if (minPrice > prices[i]) {
+                minPrice = prices[i];
+            } else if (max < tempMin) {
+                max = tempMin;
+            }
+        }
+        return max;
+    }
+
 }
