@@ -55,21 +55,21 @@ public class TopN {
         return queue.peek();
     }
 
-    public static int partition(Integer[] arry, int l, int r){
+    public static int partition(Integer[] nums, int l, int r){
         int i = l;
         int j = r + 1;
-        int p = arry[l];
+        int p = nums[l];
         while (true){
-            while (i < r && arry[++i] <= p ){
+            while (i < r && nums[++i] <= p ){
             }
-            while (j > l && arry[--j] >= p){
+            while (j > l && nums[--j] >= p){
             }
             if (i >= j){
                 break;
             }
-            ArrayUtils.swap(arry, i, j);
+            ArrayUtils.swap(nums, i, j);
         }
-        ArrayUtils.swap(arry, l, j);
+        ArrayUtils.swap(nums, l, j);
         return j;
     }
 

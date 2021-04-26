@@ -8,7 +8,7 @@ package com.zxa.practice.leetcode.first.sort;
 public class QuickSort {
 
     public static void main(String[] args) {
-        Integer[] integers = {2};
+        Integer[] integers = {2,2,3,4,6,1,2,67};
         quickSort(integers, 0, integers.length - 1);
         System.out.println(integers);
     }
@@ -30,15 +30,9 @@ public class QuickSort {
         int i = l, j =  r + 1;
         while (true) {
 
-            while (array[++i] <= p) {
-                if (i == r){
-                    break;
-                }
+            while (i < r && array[++i] <= p ){
             }
-            while (array[--j] >= p) {
-                if (j == l){
-                    break;
-                }
+            while (j > l && array[--j] >= p){
             }
             if ((i >= j)) {
                 break;
