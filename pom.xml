@@ -12,6 +12,7 @@
         <module>spring-hbase</module>
         <module>spring-ioc</module>
         <module>leetcode</module>
+        <module>test-demo</module>
     </modules>
 
     <parent>
